@@ -12,20 +12,24 @@
 - Merged PR: `delivery/lead` → `main` (squash merge, branch deleted).
 - Green CI run on the merge commit: `npm run type-check` → `npm run build`, all passing.
 ![Form state screenshot](./screenshots/evergreen.png)
-- _[Add your screenshot of the running app and paste your actual PR/CI links here before presenting.]_
+- https://github.com/asc1-student07/evergreen-quote-react-delivery/pull/10
+- https://github.com/asc1-student07/evergreen-quote-react-delivery/actions/runs/33788050258
 
 ## Slide 3: Two key decisions
 
 - **Decision 1: Ship the compiler-caught type fix immediately rather than batching it with other Day 2 work.**
   Why it mattered: the bug (blank coverage-type labels) was customer-visible, and the dev server was masking it — waiting would have let a shippable-looking build carry a real defect into Day 3's refactor.
-- **Decision 2: Adopt the hook/context refactor exactly as provided, with no scope additions, even though it touched every component.**
-  Why it mattered: protected the "no behavior change" guarantee the team was counting on — any customization risked breaking the live estimate or the data feed states right before CI went live.
-
-_(Both of these should also live in `decision-memo.md` — keep the two documents consistent.)_
+- **Decision 2: Called NO-GO on merging into `main` Wednesday, even though my own branch's CI was green.**
+  Why it mattered: `main` itself was red (a hotfix commit had a type error — a rate value entered as a string), and there was an open, unexplained production pricing issue (a $3,120/mo quote). A clean branch isn't the same as a safe merge target when the thing you're merging *into* is actively broken and the root cause is still unknown. I kept pushing my Day 3 work to `delivery/lead` so nothing was blocked or lost — I just didn't touch `main` until both conditions cleared.
 
 ## Slide 4: Risks & injects
 
-- **Top risk we tracked:** the dev server runs code the compiler rejects, so a page can "work" in the browser while the production build is red — mitigated by running `npm run type-check` after every assembly step, not just before merge. *(Pull this row, or your own top risk, from `risk-register.md`.)*
+- **Top risk we tracked:** the dev server runs code the compiler rejects, so a page can "work" in the browser while the production build is red — mitigated by running `npm run type-check` after every assembly step, not just before merge. 
+
+| # | Risk | Owner | Likelihood (L/M/H) | Impact (L/M/H) | Mitigation | Trigger to escalate |
+|---|---|---|---|---|---|---|
+| R1 | Dev server runs code the compiler would reject: app looks fine, build is broken | Delivery Lead | M | H | Run `type-check` after every assembly step, not just before merge | Type-check red at end of day → hold the push |
+
 - **Inject #1 (Tue):** re-prioritized the board after the sponsor's scope change; logged what was dropped and sent a two-paragraph stakeholder status update naming what was needed and by when.
 - **Inject #2 (Wed):** production-incident-style scenario; responded as a router, not a fixer — named what was observed, what was being asked for, who owned the next step, and where air cover was offered. Made a documented go/no-go call off the Wednesday CI result.
 
