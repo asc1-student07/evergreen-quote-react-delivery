@@ -11,11 +11,37 @@ export function useQuoteEstimate() {
   const [age, setAge] = useState(35);
   const [coverageAmount, setCoverageAmount] = useState(50000);
 
-  const isValid = age >= 18 && age <= 100 && coverageAmount >= 10000;
+  /*
+   * OLD VALIDATION LOGIC (kept for comparison)
+   *
+   * const isValid = age >= 18 && age <= 100 && coverageAmount >= 10000;
+   * const premium = isValid ? calculatePremium(type, age, coverageAmount) : null;
+   * const error = isValid
+   *   ? ""
+   *   : "Enter age 18–100 and coverage of at least $10,000.";
+   */
+
+  /* =============================
+   * NEW VALIDATION LOGIC (ACTIVE)
+   * ============================= */
+  const ageError =
+    Number.isNaN(age) || age < 18
+      ? "Age must be at least 18."
+      : age > 100
+      ? "Age must be 100 or below."
+      : "";
+
+  const coverageError =
+    Number.isNaN(coverageAmount) || coverageAmount < 10000
+      ? "Coverage must be at least $10,000."
+      : "";
+
+  const error = ageError || coverageError;
+  const isValid = error === "";
   const premium = isValid ? calculatePremium(type, age, coverageAmount) : null;
-  const error = isValid
-    ? ""
-    : "Enter age 18–100 and coverage of at least $10,000.";
+  /* =========================
+   * END NEW VALIDATION LOGIC
+   * ========================= */
 
   return {
     type,
