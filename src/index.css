@@ -1,12 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap");
+
 :root {
-  /* Liberty Mutual blue carried over from the Phase 1 brand refresh */
-  --primary: #0066b2;
-  --primary-dark: #00497f;
-  --text: #1c2b36;
-  --muted: #5b6b78;
+  --primary: #005daa;
+  --primary-dark: #003b70;
+  --primary-deep: #002b52;
+  --primary-soft: #e9f2fb;
+  --accent: #f6b21a;
+  --accent-dark: #d99600;
+  --callout-yellow: #fff7dd;
+  --callout-yellow-border: #f2c63f;
+  --text: #14293d;
+  --muted: #3f556a;
   --surface: #ffffff;
-  --page-bg: #f4f7fa;
-  --border: #d7e0e8;
+  --page-bg: #eaf1f8;
+  --border: #c3d3e3;
   --form-padding: 24px;
 }
 
@@ -16,51 +23,75 @@
 
 body {
   margin: 0;
-  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  font-family: "Source Sans 3", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
   color: var(--text);
   background: var(--page-bg);
+  line-height: 1.45;
 }
 
 .site-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--primary);
+  background: linear-gradient(110deg, var(--primary-deep), var(--primary-dark) 60%, var(--primary));
   color: #fff;
-  padding: 16px 32px;
+  padding: 18px 32px;
+  border-bottom: 3px solid var(--accent);
 }
 
 .brand {
-  font-size: 1.3rem;
-  font-weight: 700;
+  font-size: 1.28rem;
+  font-weight: 800;
+  letter-spacing: 0.015em;
 }
 
 .site-nav a {
-  color: #fff;
+  color: #f3f8fd;
   text-decoration: none;
   margin-left: 20px;
+  opacity: 0.9;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.site-nav a:hover {
+  opacity: 1;
+  text-decoration: underline;
 }
 
 .page {
-  max-width: 960px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 24px 16px 48px;
+  padding: 34px 16px 52px;
 }
 
 .hero {
-  text-align: center;
-  padding: 32px 16px;
+  text-align: left;
+  padding: 38px 32px;
+  background: linear-gradient(140deg, #f8fbff, var(--primary-soft));
+  border: 1px solid #b9cee2;
+  border-radius: 14px;
+  box-shadow: 0 14px 30px rgba(0, 47, 94, 0.1);
+  margin-bottom: 24px;
 }
 
 .hero h1 {
-  font-size: 2.2rem;
-  margin: 0 0 8px;
-  color: var(--primary-dark);
+  font-size: clamp(2.1rem, 3.4vw, 2.8rem);
+  margin: 0 0 12px;
+  color: var(--primary-deep);
+  line-height: 1.12;
+  max-width: none;
+  font-weight: 800;
+  letter-spacing: -0.015em;
 }
 
 .hero p {
   color: var(--muted);
   margin: 0;
+  font-size: 1.08rem;
+  max-width: none;
+  font-weight: 600;
+  line-height: 1.42;
 }
 
 .quote-form-section {
@@ -72,30 +103,68 @@ body {
 
 .quote-form,
 .recent-quotes {
+  border-radius: 12px;
+  padding: var(--form-padding);
+  box-shadow: 0 6px 16px rgba(0, 45, 95, 0.06);
+}
+
+.quote-form {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: var(--form-padding);
+}
+
+.recent-quotes {
+  background: var(--callout-yellow);
+  border: 1px solid var(--callout-yellow-border);
+  border-radius: 26px;
+  box-shadow: none;
 }
 
 .quote-form h2,
 .recent-quotes h2 {
   margin-top: 0;
+  color: var(--primary-deep);
+  letter-spacing: -0.005em;
+  padding-bottom: 10px;
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.quote-form h2 {
+  border-bottom: none;
+  margin-bottom: 16px;
+}
+
+.recent-quotes h2 {
+  border-bottom: none;
+  margin-bottom: 16px;
 }
 
 .quote-form label {
   display: block;
-  margin: 14px 0 4px;
+  margin: 16px 0 6px;
   font-weight: 600;
+  color: #1e3753;
+  font-size: 1.08rem;
 }
 
 .quote-form select,
 .quote-form input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-size: 1rem;
+  padding: 12px 12px;
+  border: 1px solid #cad5e1;
+  border-radius: 8px;
+  font-size: 1.06rem;
+  color: #243a52;
+  background: #fcfeff;
+}
+
+.quote-form select:focus,
+.quote-form input:focus {
+  outline: 2px solid rgba(0, 93, 170, 0.24);
+  outline-offset: 1px;
+  border-color: var(--primary);
 }
 
 .estimate {
@@ -104,12 +173,15 @@ body {
   justify-content: space-between;
   margin: 20px 0 8px;
   padding: 14px 16px;
-  background: #eef5fb;
+  background: #f4f9ff;
   border-radius: 8px;
+  border: 1px solid #c8dbef;
+  border-left: 5px solid var(--primary);
 }
 
 .estimate-label {
   color: var(--muted);
+  font-weight: 600;
 }
 
 .estimate-amount {
@@ -131,18 +203,26 @@ body {
 
 .primary-btn {
   width: 100%;
-  padding: 12px;
+  padding: 13px;
   border: none;
-  border-radius: 6px;
-  background: var(--primary);
-  color: #fff;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #1f2a36;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
+  transition: background-color 0.16s ease-in, transform 0.16s ease-in;
 }
 
 .primary-btn:hover {
-  background: var(--primary-dark);
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+.primary-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .recent-list {
@@ -152,8 +232,8 @@ body {
 }
 
 .recent-list li {
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 43, 82, 0.2);
 }
 
 .recent-list li:last-child {
@@ -161,22 +241,48 @@ body {
 }
 
 .recent-list .quote-type {
+  color: #19395a;
   font-weight: 600;
   text-transform: capitalize;
+  font-size: 1.05rem;
 }
 
 .recent-list .quote-premium {
-  color: var(--primary-dark);
+  color: #0d2f56;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.recent-quotes .loading,
+.recent-quotes .message {
+  color: #153457;
 }
 
 .site-footer {
   text-align: center;
-  color: var(--muted);
+  color: #e6eff8;
   padding: 24px 16px;
   font-size: 0.9rem;
+  background: var(--primary-deep);
+  border-top: 3px solid var(--primary);
+}
+
+.loading {
+  color: var(--muted);
+  font-weight: 600;
 }
 
 @media (max-width: 720px) {
+  .hero {
+    text-align: center;
+    padding: 30px 20px;
+  }
+
+  .hero h1,
+  .hero p {
+    max-width: none;
+  }
+
   .quote-form-section {
     grid-template-columns: 1fr;
   }
