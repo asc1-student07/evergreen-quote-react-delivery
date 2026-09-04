@@ -15,12 +15,17 @@
 - https://github.com/asc1-student07/evergreen-quote-react-delivery/pull/10
 - https://github.com/asc1-student07/evergreen-quote-react-delivery/actions/runs/33788050258
 
-## Slide 3: Two key decisions
+## Slide 3: Three key decisions
 
 - **Decision 1: Ship the compiler-caught type fix immediately rather than batching it with other Day 2 work.**
   Why it mattered: the bug (blank coverage-type labels) was customer-visible, and the dev server was masking it — waiting would have let a shippable-looking build carry a real defect into Day 3's refactor.
 - **Decision 2: Called NO-GO on merging into `main` Wednesday, even though my own branch's CI was green.**
   Why it mattered: `main` itself was red (a hotfix commit had a type error — a rate value entered as a string), and there was an open, unexplained production pricing issue (a $3,120/mo quote). A clean branch isn't the same as a safe merge target when the thing you're merging *into* is actively broken and the root cause is still unknown. I kept pushing my Day 3 work to `delivery/lead` so nothing was blocked or lost — I just didn't touch `main` until both conditions cleared.
+- **Decision 3: Defer zip code addition**
+  Why it mattered: This wasn't simply adding a box. I know Marketing's pricing table is ready on their end, but "ready" there isn't the
+same as integrated here, someone still has to get that table into our rate model and types in a way the compiler can actually verify, which is real work, not a checkbox. Squeezing that in on top of what we've already
+committed to this week risks the one goal that matters most: a merged,
+green-build app. A ZIP field that doesn't yet affect price would just hand 
 
 ## Slide 4: Risks & injects
 
